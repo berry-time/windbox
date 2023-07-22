@@ -1,6 +1,12 @@
 # Windbox
 Windbox is a music playing hardware and software based on Raspberry Pi and Python.
-It is ment to be used by toddlers and has a very basic control via a few buttons (e.g. "arcade buttons").
+It is ment to be used by toddlers and has a very basic control via a few buttons (e.g. "arcade buttons"):
+* when a control button is pressed, the next song of the associated playlist is played
+* when a control button with empty playlist is pressed, the playback is stopped (in my case, the transparent button)
+
+Each playlist can be configured whether to continue to the next song in the list automatically or not.
+Playlists are automatically generated from all supported audio formats (e.g. MP3 or OGG) within a specific folder.
+The internal battery can be charged via USB-C either during playback or while the system is switched off.  
 
 ![Windbox](images/windbox.jpg)
 
