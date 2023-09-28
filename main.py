@@ -11,7 +11,7 @@
 #
 # SET THE FOLLOWING CRONTAB ENTRIES (RUN crontab -e)
 # # windbox start script
-# @reboot /usr/bin/python3 /home/pi/zero-fun-net/windbox/windbox.py & > /home/pi/zero-fun-net/windbox/console.log 2>&1
+# @reboot /usr/bin/python3 /home/pi/berry-time/windbox/windbox.py & > /home/pi/berry-time/windbox/console.log 2>&1
 # # turn off LED to reduce power consumption, see https://picockpit.com/raspberry-pi/raspberry-pi-zero-2-battery
 # @reboot echo none | sudo tee /sys/class/leds/led0/trigger &
 # # disable HDMI to reduce power consumption, see https://picockpit.com/raspberry-pi/raspberry-pi-zero-2-battery
