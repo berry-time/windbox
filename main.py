@@ -58,7 +58,7 @@ def main():
         * if a button is pressed, the current song is skipped (if any is playing) and the next song
           from the playlist associated to the pressed button is played
     '''
-    app_base_path = "/home/pi/zero-fun-net/windbox"
+    app_base_path = "/home/pi/berry-time/windbox"
     song_path = os.path.join(app_base_path, "songs")
     logger_path = os.path.join(app_base_path, "logger.log")
 
