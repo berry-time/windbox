@@ -9,6 +9,10 @@
 # RUN THE INSTALLER SCRIPT FOR "I2S DAC" AUDIO BOARD
 # curl -sS https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/i2samp.sh | bash
 #
+# DISABLE DESKTOP LOGIN (if using Raspberry Pi OS with desktop)
+# sudo raspi-config
+# System Options -> Boot / Auto Login -> Console Autologin
+#
 # SET THE FOLLOWING CRONTAB ENTRIES (RUN crontab -e)
 # # windbox start script
 # @reboot /usr/bin/python3 /home/pi/berry-time/windbox/windbox.py & > /home/pi/berry-time/windbox/console.log 2>&1
@@ -75,16 +79,26 @@ def main():
     play_buttons.add(pin=27, folder=os.path.join(song_path, "white"), autoplay=True)
     play_buttons.add(pin=10, folder="/dev/null")  # transparent button, just to stop playing
 
+    delay_time = 0.2
+    shutdown_time = 3600  # turn off after 1 hour of inactivity
+    idle_time = 0
+
     while True:
-        time.sleep(0.2)  # no need to hurry
+        time.sleep(delay_time)
         if mixer.music.get_busy():
             # Still playing, nothing to do.
+            idle_time = 0
             continue
         if play_buttons.playback_state.is_active():
             # Finished playing, but we have an active playback of a playlist. Play next song.
             logger.info("Autoplay active for this button, playing next track.")
             play_buttons.get_by_id(play_buttons.playback_state.get_active_id()).pressed()
-
+            idle_time = 0
+            continue
+        idle_time += delay_time
+        if idle_time > shutdown_time:
+            os.system("sudo systemctl poweroff")
+            break
 
 if __name__ == '__main__':
     main()
